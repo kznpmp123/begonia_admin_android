@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:kozarni_ecome/controller/home_controller.dart';
+import 'package:kozarni_ecome/data/constant.dart';
 
 class BottomNav extends StatelessWidget {
   const BottomNav({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = Get.find();
     return Container(
       width: double.infinity,
       height: 70,
@@ -24,33 +28,63 @@ class BottomNav extends StatelessWidget {
           )
         ],
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: IconButton(
-              onPressed: () {},
-              icon: FaIcon(FontAwesomeIcons.home),
+      child: Obx(
+        () => Row(
+          children: [
+            Expanded(
+              child: IconButton(
+                onPressed: () {
+                  controller.changeNav(0);
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.home,
+                  color: controller.navIndex.value == 0
+                      ? homeIndicatorColor
+                      : null,
+                ),
+              ),
             ),
-          ),
-          Expanded(
-            child: IconButton(
-              onPressed: () {},
-              icon: FaIcon(FontAwesomeIcons.thLarge),
+            Expanded(
+              child: IconButton(
+                onPressed: () {
+                  controller.changeNav(1);
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.fire,
+                  color: controller.navIndex.value == 1
+                      ? homeIndicatorColor
+                      : null,
+                ),
+              ),
             ),
-          ),
-          Expanded(
-            child: IconButton(
-              onPressed: () {},
-              icon: FaIcon(FontAwesomeIcons.shoppingBag),
+            Expanded(
+              child: IconButton(
+                onPressed: () {
+                  controller.changeNav(2);
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.shoppingBag,
+                  color: controller.navIndex.value == 2
+                      ? homeIndicatorColor
+                      : null,
+                ),
+              ),
             ),
-          ),
-          Expanded(
-            child: IconButton(
-              onPressed: () {},
-              icon: FaIcon(FontAwesomeIcons.userAlt),
+            Expanded(
+              child: IconButton(
+                onPressed: () {
+                  controller.changeNav(3);
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.userAlt,
+                  color: controller.navIndex.value == 3
+                      ? homeIndicatorColor
+                      : null,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:kozarni_ecome/controller/home_controller.dart';
 import 'package:kozarni_ecome/data/constant.dart';
-import 'package:kozarni_ecome/screen/view/category.dart';
+import 'package:kozarni_ecome/screen/view/cart.dart';
+import 'package:kozarni_ecome/screen/view/hot.dart';
 import 'package:kozarni_ecome/screen/view/home.dart';
 import 'package:kozarni_ecome/widgets/bottom_nav.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'view/profile.dart';
+
 List<Widget> _template = [
   HomeView(),
-  CategoryView(),
+  HotView(),
+  CartView(),
+  ProfileView(),
 ];
 
-class Template extends StatelessWidget {
-  const Template({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = Get.find();
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
@@ -56,30 +64,45 @@ class Template extends StatelessWidget {
           //     ),
           //   ),
           // )
-          Container(
-            margin: EdgeInsets.only(
-              top: 7,
-              bottom: 10,
-              right: 7,
-            ),
-            width: 40,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                alignment: Alignment.center,
-                padding: MaterialStateProperty.all(EdgeInsets.all(0)),
-                backgroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(80),
-                )),
-                overlayColor: MaterialStateProperty.all(Colors.black12),
-              ),
-              onPressed: () {},
-              child: FaIcon(
-                FontAwesomeIcons.search,
-                color: Colors.black,
-                size: 20,
-              ),
-            ),
+          Obx(
+            () => controller.isSearch.value
+                ? Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: 50,
+                    child: TextField(
+                      onSubmitted: controller.searchItem,
+                      decoration: InputDecoration(
+                        hintText: "Search...",
+                        // border: OutlineInputBorder(),
+                      ),
+                    ),
+                  )
+                : Container(
+                    margin: EdgeInsets.only(
+                      top: 7,
+                      bottom: 10,
+                      right: 7,
+                    ),
+                    width: 40,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        alignment: Alignment.center,
+                        padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(80),
+                        )),
+                        overlayColor: MaterialStateProperty.all(Colors.black12),
+                      ),
+                      onPressed: controller.search,
+                      child: FaIcon(
+                        FontAwesomeIcons.search,
+                        color: Colors.black,
+                        size: 20,
+                      ),
+                    ),
+                  ),
           ),
           Container(
             margin: EdgeInsets.only(
@@ -138,7 +161,9 @@ class Template extends StatelessWidget {
           // )
         ],
       ),
-      body: _template[1],
+      body: Obx(
+        () => _template[controller.navIndex.value],
+      ),
       bottomNavigationBar: BottomNav(),
     );
   }

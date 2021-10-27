@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "686183509384",
+    "project_id": "starlight-shopping-app",
+    "storage_bucket": "starlight-shopping-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686183509384:android:e4501438f6af3e69059e3d",
+        "android_client_info": {
+          "package_name": "com.starlight.shopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686183509384-a4m9svhr72mjrekmeirnt95s01ksif8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.starlight.shopping",
+            "certificate_hash": "71cdf22b09fc882f4dfeb64c33f210771d3a9d57"
+          }
+        },
+        {
+          "client_id": "686183509384-0d1eevum8u6par9bhugnht62cej8ksqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC_Lbn6NqjXAamBHBtotgKBbawhnWIYXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686183509384-0d1eevum8u6par9bhugnht62cej8ksqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

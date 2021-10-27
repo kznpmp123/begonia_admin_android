@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kozarni_ecome">
+    package="com.starlight.shopping">
    <application
         android:label="kozarni_ecome"
         android:icon="@mipmap/ic_launcher">

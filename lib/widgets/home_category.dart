@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kozarni_ecome/controller/home_controller.dart';
 import 'package:kozarni_ecome/data/constant.dart';
 
 List<String> category = [
-  'all',
-  'machine tools',
-  'man',
-  'woman',
   'all',
   'machine tools',
   'man',
@@ -17,6 +15,7 @@ class HomeCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = Get.find();
     return Container(
       width: double.infinity,
       height: 50,
@@ -32,18 +31,27 @@ class HomeCategory extends StatelessWidget {
             bottom: 6,
             right: 20,
           ),
-          child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(homeIndicatorColor),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+          child: Obx(
+            () => ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: controller.category.value == category[i]
+                    ? MaterialStateProperty.all(homeIndicatorColor)
+                    : MaterialStateProperty.all(Colors.white),
+                foregroundColor: controller.category.value == category[i]
+                    ? MaterialStateProperty.all(Colors.white)
+                    : MaterialStateProperty.all(Colors.black),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
               ),
-            ),
-            onPressed: () {},
-            child: Text(
-              category[i],
+              onPressed: () {
+                controller.changeCat(category[i]);
+              },
+              child: Text(
+                category[i],
+              ),
             ),
           ),
         ),

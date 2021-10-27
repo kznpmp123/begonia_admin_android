@@ -1,4 +1,4 @@
-package com.example.kozarni_ecome
+package com.starlight.shopping
 
 import io.flutter.embedding.android.FlutterActivity
 
