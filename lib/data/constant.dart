@@ -9,3 +9,9 @@ const Color detailTextBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
 ButtonStyle buttonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all(homeIndicatorColor),
 );
+
+const String baseUrl = 'http://192.168.1.4:5000/api/v1/streaming/movie/';
+const String profileUrl = 'profile/';
+
+const String userCollection = 'users';
+const String profileCollection = 'profiles';

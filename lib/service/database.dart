@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Database {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<void> read(
+  Future<DocumentSnapshot<Map<String, dynamic>>> read(
     String collectionPath, {
     String? path,
   }) =>

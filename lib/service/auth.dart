@@ -20,6 +20,8 @@ class Auth {
         codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
       );
 
-  // Future<void> confirm(String verificationCode, ConfirmationResult result) =>
-  //     result.confirm(verificationCode);
+  Future<void> loginWithCerdential(AuthCredential credential) =>
+      _firebaseAuth.signInWithCredential(credential);
+
+  Future<void> logout() => _firebaseAuth.signOut();
 }
