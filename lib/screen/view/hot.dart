@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kozarni_ecome/controller/home_controller.dart';
+import 'package:kozarni_ecome/data/constant.dart';
 import 'package:kozarni_ecome/routes/routes.dart';
 
 class HotView extends StatelessWidget {
@@ -7,52 +10,64 @@ class HotView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.only(top: 10, bottom: 20),
-      itemCount: 4,
-      itemBuilder: (_, i) => GestureDetector(
-        onTap: () {
-          Get.toNamed(detailScreen);
-        },
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Item $i",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+    final HomeController controller = Get.find();
+    return Obx(
+      () => ListView.builder(
+        padding: EdgeInsets.only(top: 10, bottom: 20),
+        itemCount: controller.hot().length,
+        itemBuilder: (_, i) => GestureDetector(
+          onTap: () {
+            controller.setSelectedItem(controller.hot()[i]);
+            Get.toNamed(detailScreen);
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        controller.hot()[i].name,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Item $i",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ],
+                      Text(
+                        "${controller.hot()[i].price}Ks",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                width: 100,
-                height: 100,
-                color: Colors.green,
-              ),
-            ],
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(6),
+                    bottomRight: Radius.circular(6),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: controller.hot()[i].photo,
+                    // "$baseUrl$itemUrl${controller.hot()[i].photo}/get",
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

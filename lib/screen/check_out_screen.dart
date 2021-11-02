@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+import 'package:kozarni_ecome/controller/home_controller.dart';
 import 'package:kozarni_ecome/data/constant.dart';
 
-class CheckOutScreen extends StatelessWidget {
+class CheckOutScreen extends StatefulWidget {
   const CheckOutScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CheckOutScreen> createState() => _CheckOutScreenState();
+}
+
+class _CheckOutScreenState extends State<CheckOutScreen> {
+  final GlobalKey<FormState> _form = GlobalKey();
+  final HomeController controller = Get.find();
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,55 +61,94 @@ class CheckOutScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Name',
+      body: Form(
+        key: _form,
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: TextFormField(
+                controller: nameController,
+                validator: (e) =>
+                    e?.isEmpty == true ? "Name is required" : null,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Name',
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Email',
+            Padding(
+              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: TextFormField(
+                controller: emailController,
+                validator: (e) => e?.isEmpty == true
+                    ? "Email is required"
+                    : e?.isEmail == true
+                        ? null
+                        : "Invalid email",
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Email',
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Phone',
+            Padding(
+              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: TextFormField(
+                controller: phoneController,
+                validator: (e) =>
+                    e?.isEmpty == true ? "Phone is required" : null,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Phone',
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Address',
+            Padding(
+              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: TextFormField(
+                controller: addressController,
+                validator: (e) =>
+                    e?.isEmpty == true ? "Address is required" : null,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Address',
+                ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 50,
-            margin: const EdgeInsets.only(top: 20, right: 20, left: 20),
-            child: ElevatedButton(
-              style: buttonStyle,
-              onPressed: () {},
-              child: Text('Proceed To Pay'),
-            ),
-          )
-        ],
+            Container(
+              width: double.infinity,
+              height: 50,
+              margin: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: ElevatedButton(
+                style: buttonStyle,
+                onPressed: () async {
+                  if (_form.currentState?.validate() == true) {
+                    await controller.proceedToPay(
+                      name: nameController.text,
+                      email: emailController.text,
+                      phone: int.parse(phoneController.text),
+                      address: addressController.text,
+                    );
+                    _form.currentState?.reset();
+                    Get.back();
+
+                    Get.snackbar("Success", 'ready to rock');
+                  }
+                },
+                child: Obx(
+                  () => controller.isLoading.value
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 0.5,
+                        )
+                      : Text('Proceed To Pay'),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

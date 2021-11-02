@@ -10,8 +10,11 @@ ButtonStyle buttonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all(homeIndicatorColor),
 );
 
-const String baseUrl = 'http://192.168.1.4:5000/api/v1/streaming/movie/';
+const String baseUrl = 'http://192.168.1.5:5000/api/v1/streaming/movie/';
 const String profileUrl = 'profile/';
+const String itemUrl = 'item/';
 
 const String userCollection = 'users';
 const String profileCollection = 'profiles';
+const String itemCollection = 'items';
+const String purchaseCollection = 'purchases';

@@ -21,40 +21,46 @@ class HomeCategory extends StatelessWidget {
       height: 50,
 
       // color: Colors.green,
-      child: ListView.builder(
-        padding: EdgeInsets.only(left: 20),
-        scrollDirection: Axis.horizontal,
-        itemCount: category.length,
-        itemBuilder: (_, i) => Container(
-          margin: EdgeInsets.only(
-            top: 6,
-            bottom: 6,
-            right: 20,
-          ),
-          child: Obx(
-            () => ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: controller.category.value == category[i]
-                    ? MaterialStateProperty.all(homeIndicatorColor)
-                    : MaterialStateProperty.all(Colors.white),
-                foregroundColor: controller.category.value == category[i]
-                    ? MaterialStateProperty.all(Colors.white)
-                    : MaterialStateProperty.all(Colors.black),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+      child: Obx(
+        () => controller.categoryList().isEmpty
+            ? Container()
+            : ListView.builder(
+                padding: EdgeInsets.only(left: 20),
+                scrollDirection: Axis.horizontal,
+                itemCount: controller.categoryList().length,
+                itemBuilder: (_, i) => Container(
+                  margin: EdgeInsets.only(
+                    top: 6,
+                    bottom: 6,
+                    right: 20,
+                  ),
+                  child: Obx(
+                    () => ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: controller.category.value ==
+                                controller.categoryList()[i]
+                            ? MaterialStateProperty.all(homeIndicatorColor)
+                            : MaterialStateProperty.all(Colors.white),
+                        foregroundColor: controller.category.value ==
+                                controller.categoryList()[i]
+                            ? MaterialStateProperty.all(Colors.white)
+                            : MaterialStateProperty.all(Colors.black),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        controller.changeCat(controller.categoryList()[i]);
+                      },
+                      child: Text(
+                        controller.categoryList()[i],
+                      ),
+                    ),
                   ),
                 ),
               ),
-              onPressed: () {
-                controller.changeCat(category[i]);
-              },
-              child: Text(
-                category[i],
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

@@ -201,7 +201,9 @@ class _AdminPanel extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(mangeItemScreen);
+          },
           child: Container(
             height: 60,
             margin: EdgeInsets.only(
@@ -216,6 +218,28 @@ class _AdminPanel extends StatelessWidget {
                   children: [
                     Text("Manage Item"),
                     Icon(Icons.edit),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            height: 60,
+            margin: EdgeInsets.only(
+              left: 20,
+              right: 20,
+            ),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Purchase"),
+                    Icon(Icons.shop),
                   ],
                 ),
               ),

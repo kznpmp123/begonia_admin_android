@@ -3,6 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Database {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> watch(String collectionPath) =>
+      _firebaseFirestore.collection(collectionPath).snapshots();
+
   Future<DocumentSnapshot<Map<String, dynamic>>> read(
     String collectionPath, {
     String? path,
