@@ -27,8 +27,8 @@ class DetailScreen extends StatelessWidget {
       body: ListView(
         children: [
           CachedNetworkImage(
-            imageUrl:
-                "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
+            imageUrl: controller.selectedItem.value.photo,
+            // "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
             width: double.infinity,
             height: 200,
             fit: BoxFit.cover,

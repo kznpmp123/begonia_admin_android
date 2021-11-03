@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:kozarni_ecome/controller/home_controller.dart';
 import 'package:kozarni_ecome/controller/manage_controller.dart';
 import 'package:kozarni_ecome/data/constant.dart';
+import 'package:kozarni_ecome/routes/routes.dart';
 
 class ManageItem extends StatefulWidget {
   const ManageItem({Key? key}) : super(key: key);
@@ -60,6 +61,8 @@ class _ManageItemState extends State<ManageItem> {
                     color: Colors.grey,
                     onTap: (CompletionHandler _) async {
                       await _(false);
+                      homeController.setEditItem(homeController.items[i]);
+                      Get.toNamed(uploadItemScreen);
                       setState(() {});
                     },
                     title: 'Edit',

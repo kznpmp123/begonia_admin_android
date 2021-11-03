@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kozarni_ecome/controller/home_controller.dart';
 import 'package:kozarni_ecome/data/constant.dart';
 import 'package:kozarni_ecome/model/item.dart';
 import 'package:kozarni_ecome/service/api.dart';
@@ -8,6 +9,23 @@ import 'package:kozarni_ecome/service/database.dart';
 
 class UploadController extends GetxController {
   final RxBool isUploading = false.obs;
+
+  final HomeController _homeController = Get.find();
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    if (_homeController.editItem.value.id != null) {
+      photoController.text = _homeController.editItem.value.photo;
+      nameController.text = _homeController.editItem.value.name;
+      priceController.text = _homeController.editItem.value.price.toString();
+      colorController.text = _homeController.editItem.value.color;
+      sizeController.text = _homeController.editItem.value.size;
+      starController.text = _homeController.editItem.value.star.toString();
+      categoryController.text = _homeController.editItem.value.category;
+    }
+  }
 
   final Api _api = Api();
   final Database _database = Database();
@@ -55,19 +73,37 @@ class UploadController extends GetxController {
         //       "${dateTime.year}${dateTime.month}${dateTime.day}${dateTime.hour}${dateTime.minute}${dateTime.second}",
         // );
 
-        await _database.write(
-          itemCollection,
-          data: ItemModel(
-            photo: photoController.text,
-            // "${dateTime.year}${dateTime.month}${dateTime.day}${dateTime.hour}${dateTime.minute}${dateTime.second}",
-            name: nameController.text,
-            price: int.parse(priceController.text),
-            color: colorController.text,
-            size: sizeController.text,
-            star: int.parse(starController.text),
-            category: categoryController.text,
-          ).toJson(),
-        );
+        if (_homeController.editItem.value.id != null) {
+          await _database.update(
+            itemCollection,
+            path: _homeController.editItem.value.id!,
+            data: _homeController.editItem.value
+                .copyWith(
+                  newPhoto: photoController.text,
+                  newName: nameController.text,
+                  newColor: colorController.text,
+                  newPrice: int.parse(priceController.text),
+                  newSize: sizeController.text,
+                  newStar: int.parse(starController.text),
+                  newCategory: categoryController.text,
+                )
+                .toJson(),
+          );
+        } else {
+          await _database.write(
+            itemCollection,
+            data: ItemModel(
+              photo: photoController.text,
+              // "${dateTime.year}${dateTime.month}${dateTime.day}${dateTime.hour}${dateTime.minute}${dateTime.second}",
+              name: nameController.text,
+              price: int.parse(priceController.text),
+              color: colorController.text,
+              size: sizeController.text,
+              star: int.parse(starController.text),
+              category: categoryController.text,
+            ).toJson(),
+          );
+        }
         isUploading.value = false;
         Get.snackbar('Success', 'Uploaded successfully!');
         filePath.value = '';

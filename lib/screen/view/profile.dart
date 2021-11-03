@@ -225,7 +225,9 @@ class _AdminPanel extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(purchaseScreen);
+          },
           child: Container(
             height: 60,
             margin: EdgeInsets.only(

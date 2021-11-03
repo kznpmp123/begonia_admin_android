@@ -69,7 +69,34 @@ class HomeController extends GetxController {
     selectedItem.value = item;
   }
 
-  ItemModel getItem(String id) => items.firstWhere((e) => e.id == id);
+  final Rx<ItemModel> editItem = ItemModel(
+    photo: '',
+    name: '',
+    price: 0,
+    color: '',
+    size: '',
+    star: 0,
+    category: '',
+  ).obs;
+
+  void setEditItem(ItemModel itemModel) {
+    editItem.value = itemModel;
+  }
+
+  ItemModel getItem(String id) {
+    try {
+      return items.firstWhere((e) => e.id == id);
+    } catch (e) {
+      return ItemModel(
+          photo: '',
+          name: 'Stock Out',
+          price: 0,
+          color: '',
+          size: '',
+          star: 0,
+          category: '');
+    }
+  }
 
   List<ItemModel> getItems() => category.value == 'all'
       ? items
@@ -146,6 +173,13 @@ class HomeController extends GetxController {
     return price;
   }
 
+  final RxList<PurchaseModel> _purhcases = <PurchaseModel>[].obs;
+
+  List<PurchaseModel> purhcases() {
+    _purhcases.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
+    return _purhcases;
+  }
+
   final RxBool isLoading = false.obs;
 
   Future<void> proceedToPay({
@@ -158,7 +192,10 @@ class HomeController extends GetxController {
     isLoading.value = true;
     try {
       final PurchaseModel _purchase = PurchaseModel(
-        items: myCart.map((cart) => cart.id).toList(),
+        items: myCart
+            .map(
+                (cart) => "${cart.id},${cart.color},${cart.size},${cart.count}")
+            .toList(),
         name: name,
         email: email,
         phone: phone,
@@ -283,6 +320,17 @@ class HomeController extends GetxController {
         user.value = user.value.update(
           newProfileImage: _profile.data()?['link'],
         );
+        if (user.value.isAdmin) {
+          _database.watch(purchaseCollection).listen((event) {
+            if (event.docs.isEmpty) {
+              _purhcases.clear();
+            } else {
+              _purhcases.value = event.docs
+                  .map((e) => PurchaseModel.fromJson(e.data(), e.id))
+                  .toList();
+            }
+          });
+        }
       }
     });
   }

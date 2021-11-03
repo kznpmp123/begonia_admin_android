@@ -6,12 +6,14 @@ import 'package:kozarni_ecome/screen/detail_screen.dart';
 import 'package:kozarni_ecome/screen/home_screen.dart';
 import 'package:kozarni_ecome/screen/item_upload_screen.dart';
 import 'package:kozarni_ecome/screen/manage_item.dart';
+import 'package:kozarni_ecome/screen/purchase_screen.dart';
 
 const String homeScreen = '/home';
 const String checkOutScreen = '/checkout';
 const String detailScreen = '/detail';
 const String uploadItemScreen = '/uploadItemScreen';
 const String mangeItemScreen = '/manage-item';
+const String purchaseScreen = '/purchase-screen';
 
 List<GetPage> routes = [
   GetPage(
@@ -35,5 +37,9 @@ List<GetPage> routes = [
     name: mangeItemScreen,
     page: () => ManageItem(),
     binding: ManageBinding(),
-  )
+  ),
+  GetPage(
+    name: purchaseScreen,
+    page: () => PurchaseScreen(),
+  ),
 ];
