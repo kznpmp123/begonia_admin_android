@@ -25,8 +25,10 @@ class PurchaseScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: controller.purhcases().length,
         itemBuilder: (_, i) => ListTile(
-          title: Text("invoice id: ${controller.purhcases()[i].id}"),
-          subtitle: Text(controller.purhcases()[i].phone.toString()),
+          title: Text(
+              "${controller.purhcases()[i].dateTime?.day}/${controller.purhcases()[i].dateTime?.month}/${controller.purhcases()[i].dateTime?.year}"),
+          subtitle: Text(
+              "${controller.purhcases()[i].name} 0${controller.purhcases()[i].phone}"),
           trailing: IconButton(
             onPressed: () {
               print(controller.purhcases()[i].items.length);
@@ -71,7 +73,7 @@ class PurchaseScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Phon"),
-                          Text(controller.purhcases()[i].phone.toString()),
+                          Text("0${controller.purhcases()[i].phone}"),
                         ],
                       ),
                       SizedBox(
