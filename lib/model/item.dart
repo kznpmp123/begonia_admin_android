@@ -1,8 +1,10 @@
 class ItemModel {
   final String? id;
   final String photo;
+  final String desc;
   final String name;
   final int price;
+
   final String color;
   final String size;
   final int star;
@@ -14,6 +16,7 @@ class ItemModel {
     required this.photo,
     required this.name,
     required this.price,
+    required this.desc,
     required this.color,
     required this.size,
     required this.star,
@@ -25,6 +28,7 @@ class ItemModel {
         id: id,
         photo: json['photo'] as String,
         name: json['name'] as String,
+        desc: json['desc'] as String,
         price: json['price'] as int,
         color: json['color'] as String,
         size: json['size'] as String,
@@ -40,12 +44,13 @@ class ItemModel {
         'size': size,
         'star': star,
         'category': category,
-        // 'createdAt':created ?? DateTime.now(),
+        'desc': desc,
       };
 
   ItemModel copyWith({
     String? newPhoto,
     String? newName,
+    String? des,
     int? newPrice,
     String? newColor,
     String? newSize,
@@ -57,6 +62,7 @@ class ItemModel {
         photo: newPhoto ?? photo,
         name: newName ?? name,
         price: newPrice ?? price,
+        desc: des ?? desc,
         color: newColor ?? color,
         size: newSize ?? size,
         star: newStar ?? star,

@@ -62,6 +62,7 @@ class HomeController extends GetxController {
           name: '',
           price: 0,
           color: '',
+          desc: '',
           size: '',
           star: 0,
           category: '')
@@ -76,6 +77,7 @@ class HomeController extends GetxController {
     name: '',
     price: 0,
     color: '',
+    desc: '',
     size: '',
     star: 0,
     category: '',
@@ -94,6 +96,7 @@ class HomeController extends GetxController {
           name: 'Stock Out',
           price: 0,
           color: '',
+          desc: '',
           size: '',
           star: 0,
           category: '');

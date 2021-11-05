@@ -24,6 +24,7 @@ class UploadController extends GetxController {
       sizeController.text = _homeController.editItem.value.size;
       starController.text = _homeController.editItem.value.star.toString();
       categoryController.text = _homeController.editItem.value.category;
+      desc.text = _homeController.editItem.value.desc;
     }
   }
 
@@ -37,6 +38,7 @@ class UploadController extends GetxController {
 
   final TextEditingController photoController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController desc = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController colorController = TextEditingController();
   final TextEditingController sizeController = TextEditingController();
@@ -96,6 +98,7 @@ class UploadController extends GetxController {
               photo: photoController.text,
               // "${dateTime.year}${dateTime.month}${dateTime.day}${dateTime.hour}${dateTime.minute}${dateTime.second}",
               name: nameController.text,
+              desc: desc.text,
               price: int.parse(priceController.text),
               color: colorController.text,
               size: sizeController.text,

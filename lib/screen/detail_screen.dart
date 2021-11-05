@@ -79,7 +79,13 @@ class DetailScreen extends StatelessWidget {
                 ),
                 Text(
                   controller.selectedItem.value.category,
-                )
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  controller.selectedItem.value.desc,
+                ),
               ],
             ),
           )

@@ -26,6 +26,7 @@ class _UploadItemState extends State<UploadItem> {
         photo: '',
         name: '',
         price: 0,
+        desc: '',
         color: '',
         size: '',
         star: 0,
@@ -114,6 +115,21 @@ class _UploadItemState extends State<UploadItem> {
                 validator: controller.validator,
                 decoration: InputDecoration(
                   hintText: 'Name',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+              ),
+              child: TextFormField(
+                controller: controller.desc,
+                validator: controller.validator,
+                decoration: InputDecoration(
+                  hintText: 'Desc',
                   border: OutlineInputBorder(),
                 ),
               ),
