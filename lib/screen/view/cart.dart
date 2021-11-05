@@ -130,7 +130,7 @@ class CartView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${controller.subTotal()}Ks",
+                          "${controller.subTotal}Ks",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -190,7 +190,7 @@ class CartView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${controller.subTotal() + controller.shipping()}Ks",
+                          "${controller.subTotal + controller.shipping()}Ks",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

@@ -123,7 +123,7 @@ class HomeItems extends StatelessWidget {
                             EdgeInsets.only(left: 20, right: 20, bottom: 10),
                         radius: 0,
                         title: '',
-                        content: _AddToCart(
+                        content: AddToCart(
                           itemModel: controller.getItems()[i],
                         ),
                       );
@@ -140,18 +140,18 @@ class HomeItems extends StatelessWidget {
   }
 }
 
-class _AddToCart extends StatefulWidget {
+class AddToCart extends StatefulWidget {
   final ItemModel itemModel;
-  const _AddToCart({
+  const AddToCart({
     Key? key,
     required this.itemModel,
   }) : super(key: key);
 
   @override
-  State<_AddToCart> createState() => _AddToCartState();
+  State<AddToCart> createState() => _AddToCartState();
 }
 
-class _AddToCartState extends State<_AddToCart> {
+class _AddToCartState extends State<AddToCart> {
   String? colorValue;
   String? sizeValue;
   final HomeController controller = Get.find();

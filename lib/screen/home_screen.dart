@@ -70,6 +70,7 @@ class HomeScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.6,
                     height: 50,
                     child: TextField(
+                      onChanged: controller.onSearch,
                       onSubmitted: controller.searchItem,
                       decoration: InputDecoration(
                         hintText: "Search...",

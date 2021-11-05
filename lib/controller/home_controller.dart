@@ -55,6 +55,8 @@ class HomeController extends GetxController {
 
   final RxList<ItemModel> items = <ItemModel>[].obs;
 
+  final RxList<ItemModel> searchitems = <ItemModel>[].obs;
+
   final Rx<ItemModel> selectedItem = ItemModel(
           photo: '',
           name: '',
@@ -138,6 +140,7 @@ class HomeController extends GetxController {
       }
       return element;
     }).toList();
+    update([myCart]);
   }
 
   void remove(PurchaseItem p) {
@@ -163,11 +166,12 @@ class HomeController extends GetxController {
     }
   }
 
-  int subTotal() {
+  int get subTotal {
     int price = 0;
     for (var i = 0; i < myCart.length; i++) {
       print(items.firstWhere((element) => element.id == myCart[i].id).price);
-      price += items.firstWhere((element) => element.id == myCart[i].id).price;
+      price += items.firstWhere((element) => element.id == myCart[i].id).price *
+          myCart[i].count;
     }
 
     return price;
@@ -350,5 +354,17 @@ class HomeController extends GetxController {
   final RxBool isSearch = false.obs;
 
   void search() => isSearch.value = !isSearch.value;
-  void searchItem(String name) => isSearch.value = !isSearch.value;
+
+  void onSearch(String name) {
+    isSearch.value = true;
+    searchitems.value = items
+        .where((p0) => p0.name.toLowerCase().contains(name.toLowerCase()))
+        .toList();
+  }
+
+  void clear() => isSearch.value = false;
+
+  void searchItem(String name) {
+    isSearch.value = !isSearch.value;
+  }
 }

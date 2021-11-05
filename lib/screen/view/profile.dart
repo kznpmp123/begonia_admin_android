@@ -106,13 +106,19 @@ class _LoginUser extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(100),
                               ),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    "$baseUrl$profileUrl${_controller.user.value.profileImage!}/get",
+                              child: Image.asset(
+                                "assets/profile.JPG",
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.cover,
                               ),
+                              // CachedNetworkImage(
+                              //   imageUrl:
+                              //       "$baseUrl$profileUrl${_controller.user.value.profileImage!}/get",
+                              //   width: 100,
+                              //   height: 100,
+                              //   fit: BoxFit.cover,
+                              // ),
                             ),
                           ),
                   ),

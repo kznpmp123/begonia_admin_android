@@ -189,7 +189,6 @@ class _UploadItemState extends State<UploadItem> {
               child: TextFormField(
                 controller: controller.categoryController,
                 validator: controller.validator,
-                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: 'Category',
                   border: OutlineInputBorder(),
