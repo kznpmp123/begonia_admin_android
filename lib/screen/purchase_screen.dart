@@ -31,6 +31,17 @@ class PurchaseScreen extends StatelessWidget {
               "${controller.purhcases()[i].name} 0${controller.purhcases()[i].phone}"),
           trailing: IconButton(
             onPressed: () {
+              double total = 0;
+
+              for (var item in controller.purhcases()[i].items) {
+                total += controller
+                        .getItem(
+                          item.toString().split(',')[0],
+                        )
+                        .price *
+                    double.parse(item.toString().split(',').last);
+              }
+
               print(controller.purhcases()[i].items.length);
               Get.defaultDialog(
                   title: "Detail",
@@ -101,47 +112,54 @@ class PurchaseScreen extends StatelessWidget {
                         height: 5,
                       ),
                       Container(
-                          width: 400,
-                          height: 200,
-                          child: ListView.builder(
-                            padding: EdgeInsets.all(0),
-                            itemCount: controller.purhcases()[i].items.length,
-                            itemBuilder: (_, o) => Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Item ${o + 1}"),
-                                  SizedBox(
-                                    width: 25,
+                        width: 400,
+                        height: 200,
+                        child: ListView.builder(
+                          padding: EdgeInsets.all(0),
+                          itemCount: controller.purhcases()[i].items.length,
+                          itemBuilder: (_, o) => Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Item ${o + 1}"),
+                                SizedBox(
+                                  width: 25,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          "color:${controller.purhcases()[i].items[o].toString().split(',')[1]}"),
+                                      Text(
+                                          "size:${controller.purhcases()[i].items[o].toString().split(',')[2]}")
+                                    ],
                                   ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            "color:${controller.purhcases()[i].items[o].toString().split(',')[1]}"),
-                                        Text(
-                                            "size:${controller.purhcases()[i].items[o].toString().split(',')[2]}")
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    "${controller.getItem(
-                                          controller
-                                              .purhcases()[i]
-                                              .items[o]
-                                              .toString()
-                                              .split(',')[0],
-                                        ).name}x${controller.purhcases()[i].items[o].toString().split(',').last}",
-                                  ),
-                                ],
-                              ),
+                                ),
+                                Text(
+                                  "${controller.getItem(
+                                        controller
+                                            .purhcases()[i]
+                                            .items[o]
+                                            .toString()
+                                            .split(',')[0],
+                                      ).name}x${controller.purhcases()[i].items[o].toString().split(',').last}",
+                                ),
+                              ],
                             ),
-                          ))
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Total"),
+                          Text("$total Ks"),
+                        ],
+                      ),
                       // for (int o = 0;
                       //     o < controller.purhcases()[i].items.length;
                       //     o++)
