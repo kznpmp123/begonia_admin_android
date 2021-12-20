@@ -103,13 +103,13 @@ class HomeController extends GetxController {
     }
   }
 
-  List<ItemModel> getItems() => category.value == 'all'
+  List<ItemModel> getItems() => category.value == 'All'
       ? items
       : items.where((e) => e.category == category.value).toList();
 
   List<String> categoryList() {
     final List<String> _data = [
-      'all',
+      'All',
     ];
 
     for (var i = 0; i < items.length; i++) {
@@ -125,9 +125,9 @@ class HomeController extends GetxController {
   }
 
   List<ItemModel> pickUp() =>
-      items.where((e) => e.category == 'pickup').toList();
+      items.where((e) => e.category == 'New Products').toList();
 
-  List<ItemModel> hot() => items.where((e) => e.category == 'man').toList();
+  List<ItemModel> hot() => items.where((e) => e.category == 'Hot Sales').toList();
 
   void removeItem(String id) => items.removeWhere((item) => item.id == id);
 
@@ -309,14 +309,14 @@ class HomeController extends GetxController {
         authorized.value = false;
       } else {
         authorized.value = true;
-        // await _database.write(
-        //   userCollection,
-        //   data: {
-        //     'uid': _.uid,
-        //     'phone': _.phoneNumber,
-        //   },
-        //   path: _.uid,
-        // );
+        await _database.write(
+          userCollection,
+          data: {
+            'uid': _.uid,
+            'phone': _.phoneNumber,
+          },
+          path: _.uid,
+        );
         final DocumentSnapshot<Map<String, dynamic>> _data =
             await _database.read(userCollection, path: _.uid);
         user.value = user.value.update(
@@ -348,7 +348,7 @@ class HomeController extends GetxController {
     navIndex.value = i;
   }
 
-  final RxString category = 'all'.obs;
+  final RxString category = 'All'.obs;
 
   void changeCat(String name) {
     category.value = name;

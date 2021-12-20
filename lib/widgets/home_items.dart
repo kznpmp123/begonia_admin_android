@@ -53,7 +53,7 @@ class HomeItems extends StatelessWidget {
                     padding: EdgeInsets.only(
                       left: 20,
                       right: 20,
-                      top: 20,
+                      top: 10,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,6 +139,11 @@ class HomeItems extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
 
 class AddToCart extends StatefulWidget {
   final ItemModel itemModel;

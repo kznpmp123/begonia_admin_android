@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -41,8 +39,9 @@ class _UploadItemState extends State<UploadItem> {
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: appBarColor,
+        title: Text("Begonia Clothing Brand", style: TextStyle(color: Colors.black, fontSize: 14),),
+        elevation: 5,
+        backgroundColor: detailBackgroundColor,
         leading: IconButton(
           onPressed: Get.back,
           icon: Icon(
@@ -114,7 +113,7 @@ class _UploadItemState extends State<UploadItem> {
                 controller: controller.nameController,
                 validator: controller.validator,
                 decoration: InputDecoration(
-                  hintText: 'Name',
+                  hintText: 'Product အမည်',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -126,10 +125,16 @@ class _UploadItemState extends State<UploadItem> {
                 right: 20,
               ),
               child: TextFormField(
+                // textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                minLines: 1,
+                maxLines: null,
+
                 controller: controller.desc,
                 validator: controller.validator,
                 decoration: InputDecoration(
-                  hintText: 'Desc',
+                  hintText: 'အသေးစိတ်ဖော်ပြချက်',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -145,7 +150,7 @@ class _UploadItemState extends State<UploadItem> {
                 validator: controller.validator,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  hintText: 'Price',
+                  hintText: 'စျေးနှုန်း',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -160,7 +165,7 @@ class _UploadItemState extends State<UploadItem> {
                 controller: controller.colorController,
                 validator: controller.validator,
                 decoration: InputDecoration(
-                  hintText: 'Color',
+                  hintText: 'အရောင်',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -175,7 +180,7 @@ class _UploadItemState extends State<UploadItem> {
                 controller: controller.sizeController,
                 validator: controller.validator,
                 decoration: InputDecoration(
-                  hintText: 'Size',
+                  hintText: 'အရွယ်အစား',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -206,7 +211,7 @@ class _UploadItemState extends State<UploadItem> {
                 controller: controller.categoryController,
                 validator: controller.validator,
                 decoration: InputDecoration(
-                  hintText: 'Category',
+                  hintText: 'အမျိုးအစား',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -218,13 +223,13 @@ class _UploadItemState extends State<UploadItem> {
                 style: buttonStyle,
                 onPressed: controller.upload,
                 child: Obx(
-                  () => controller.isUploading.value
+                      () => controller.isUploading.value
                       ? CircularProgressIndicator(
-                          color: scaffoldBackground,
-                        )
+                    color: scaffoldBackground,
+                  )
                       : Text(homecontroller.editItem.value.id != null
-                          ? "edit"
-                          : "upload"),
+                      ? "Edit"
+                      : "upload"),
                 ),
               ),
             ),

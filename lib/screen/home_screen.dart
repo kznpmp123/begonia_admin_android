@@ -27,17 +27,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
-        backgroundColor: appBarColor,
-        elevation: 0,
-        title: Text(
-          "Ehay",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
-            color: appBarTitleColor,
-          ),
-        ),
+        title: const Text("Begonia Clothing Brand", style: TextStyle(color: Colors.black, fontSize: 16),),
+        elevation: 10,
+        backgroundColor: detailBackgroundColor,
         // centerTitle: true,
         actions: [
           // InkWell(

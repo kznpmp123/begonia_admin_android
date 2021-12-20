@@ -12,8 +12,9 @@ class PurchaseScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: appBarColor,
+        title: Text("Begonia Clothing Brand", style: TextStyle(color: Colors.black, fontSize: 14),),
+        elevation: 5,
+        backgroundColor: detailBackgroundColor,
         leading: IconButton(
           onPressed: Get.back,
           icon: Icon(
@@ -26,127 +27,164 @@ class PurchaseScreen extends StatelessWidget {
         itemCount: controller.purhcases().length,
         itemBuilder: (_, i) => ListTile(
           title: Text(
-              "${controller.purhcases()[i].dateTime?.day}/${controller.purhcases()[i].dateTime?.month}/${controller.purhcases()[i].dateTime?.year}"),
-          subtitle: Text(
-              "${controller.purhcases()[i].name} 0${controller.purhcases()[i].phone}"),
+              "${controller.purhcases()[i].name} 0${controller.purhcases()[i].phone}"
+          ),
+          subtitle: Text("${controller.purhcases()[i].dateTime?.day}/${controller.purhcases()[i].dateTime?.month}/${controller.purhcases()[i].dateTime?.year}"
+          ),
           trailing: IconButton(
             onPressed: () {
-              double total = 0;
+              int total = 0;
+              int shipping = 2500;
 
               for (var item in controller.purhcases()[i].items) {
                 total += controller
-                        .getItem(
-                          item.toString().split(',')[0],
-                        )
-                        .price *
-                    double.parse(item.toString().split(',').last);
+                    .getItem(
+                  item.toString().split(',')[0],
+                )
+                    .price *
+                    int.parse(item.toString().split(',').last);
               }
 
               print(controller.purhcases()[i].items.length);
               Get.defaultDialog(
-                  title: "Detail",
+                  title: "Customer ၀ယ်ယူခဲ့သော အချက်အလက်များ",
+                  titleStyle: TextStyle(fontSize: 12),
                   radius: 5,
                   content: Column(
                     children: [
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text("Invoice Id"),
+                      //     Text("${controller.purhcases()[i].id}"),
+                      //   ],
+                      // ),
+                      // SizedBox(
+                      //   height: 5,
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Invoice Id"),
-                          Text("${controller.purhcases()[i].id}"),
+                          // Text("Purchase Date"),
+                          Text("၀ယ်ယူခဲ့သော နေ့ရက် - ${controller.purhcases()[i].dateTime?.day}/${controller.purhcases()[i].dateTime?.month}/${controller.purhcases()[i].dateTime?.year}",
+                            style: TextStyle(
+                                fontSize: 14
+                            ),),
                         ],
                       ),
                       SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Date"),
-                          Text(
-                              "${controller.purhcases()[i].dateTime?.day}/${controller.purhcases()[i].dateTime?.month}/${controller.purhcases()[i].dateTime?.year}"),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Name"),
-                          Text(controller.purhcases()[i].name),
+                          // Text("Name"),
+                          Text(controller.purhcases()[i].name,
+                            style: TextStyle(
+                                fontSize: 14
+                            ),),
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Phon"),
-                          Text("0${controller.purhcases()[i].phone}"),
+                          // Text("Ph No."),
+                          Text("0${controller.purhcases()[i].phone}",
+                            style: TextStyle(
+                                fontSize: 14
+                            ),),
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Email"),
-                          Text(controller.purhcases()[i].email),
+                          // Text("Email"),
+                          Text(controller.purhcases()[i].email,
+                            style: TextStyle(
+                                fontSize: 14
+                            ),),
                         ],
                       ),
 
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Address"),
-                          Text(controller.purhcases()[i].address),
+                          // Text("Address"),
+                          Expanded(child: Text(controller.purhcases()[i].address,
+                            style: TextStyle(
+                                fontSize: 14
+                            ),)),
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 25,
                       ),
                       Container(
                         width: 400,
-                        height: 200,
+                        height: 150,
                         child: ListView.builder(
                           padding: EdgeInsets.all(0),
                           itemCount: controller.purhcases()[i].items.length,
                           itemBuilder: (_, o) => Padding(
                             padding: const EdgeInsets.only(top: 5),
-                            child: Row(
+                            child:
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Item ${o + 1}"),
+                                Text("${o + 1}. ${controller.getItem(
+                                  controller
+                                      .purhcases()[i]
+                                      .items[o]
+                                      .toString()
+                                      .split(',')[0],
+                                ).name}", style: TextStyle(
+                                    fontSize: 12
+                                ),
+
+
+                                ),
                                 SizedBox(
                                   width: 25,
                                 ),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                          "color:${controller.purhcases()[i].items[o].toString().split(',')[1]}"),
+                                        "${controller.purhcases()[i].items[o].toString().split(',')[1]}", style: TextStyle(
+                                          fontSize: 10
+                                      ),),
+
                                       Text(
-                                          "size:${controller.purhcases()[i].items[o].toString().split(',')[2]}")
+                                        "${controller.purhcases()[i].items[o].toString().split(',')[2]}", style: TextStyle(
+                                          fontSize: 10
+                                      ),)
                                     ],
                                   ),
                                 ),
                                 Text(
                                   "${controller.getItem(
-                                        controller
-                                            .purhcases()[i]
-                                            .items[o]
-                                            .toString()
-                                            .split(',')[0],
-                                      ).name}x${controller.purhcases()[i].items[o].toString().split(',').last}",
+                                    controller
+                                        .purhcases()[i]
+                                        .items[o]
+                                        .toString()
+                                        .split(',')[0],
+                                  ).price} x ${controller.purhcases()[i].items[o].toString().split(',').last} ထည်",
+                                  style: TextStyle(
+                                      fontSize: 10
+                                  ),
                                 ),
                               ],
                             ),
@@ -156,22 +194,14 @@ class PurchaseScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Total"),
-                          Text("$total Ks"),
+                          Text("စုစုပေါင်း", style: TextStyle(
+                              fontSize: 14
+                          ),),
+                          Text("$total + Deli $shipping Ks", style: TextStyle(
+                              fontSize: 14
+                          ),),
                         ],
                       ),
-                      // for (int o = 0;
-                      //     o < controller.purhcases()[i].items.length;
-                      //     o++)
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      // Text("Item ${o + 1}"),
-                      // Text(
-                      //   "${controller.getItem(controller.purhcases()[i].items[o]).name},",
-                      // ),
-                      //   ],
-                      // )
                     ],
                   ));
             },

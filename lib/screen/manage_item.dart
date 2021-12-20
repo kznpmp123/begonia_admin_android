@@ -29,8 +29,11 @@ class _ManageItemState extends State<ManageItem> {
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: appBarColor,
+        title: Text("Begonia Clothing Brand",
+          style: TextStyle(color: Colors.black,
+              fontSize: 14),),
+        elevation: 5,
+        backgroundColor: detailBackgroundColor,
         leading: IconButton(
           onPressed: Get.back,
           icon: Icon(
@@ -61,7 +64,7 @@ class _ManageItemState extends State<ManageItem> {
           ),
           Expanded(
             child: Obx(
-              () => ListView.builder(
+                  () => ListView.builder(
                 itemCount: homeController.isSearch.value
                     ? homeController.searchitems.length
                     : homeController.items.length,
@@ -95,9 +98,10 @@ class _ManageItemState extends State<ManageItem> {
                     ),
                   ],
                   child: Container(
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    height: 100,
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    height: 140,
                     child: Card(
+                      elevation: 5,
                       child: Row(
                         children: [
                           CachedNetworkImage(
@@ -105,7 +109,7 @@ class _ManageItemState extends State<ManageItem> {
                                 ? homeController.searchitems[i].photo
                                 : homeController.items[i].photo,
                             width: 100,
-                            height: 100,
+                            height: 125,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(
@@ -121,7 +125,7 @@ class _ManageItemState extends State<ManageItem> {
                                       ? homeController.searchitems[i].name
                                       : homeController.items[i].name,
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -132,9 +136,9 @@ class _ManageItemState extends State<ManageItem> {
                                   homeController.isSearch.value
                                       ? homeController.searchitems[i].color
                                       : homeController.items[i].color
-                                          .replaceAll(',', ', '),
+                                      .replaceAll(',', ', '),
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     wordSpacing: 1,
                                   ),
@@ -146,9 +150,9 @@ class _ManageItemState extends State<ManageItem> {
                                   homeController.isSearch.value
                                       ? homeController.searchitems[i].size
                                       : homeController.items[i].size
-                                          .replaceAll(',', ', '),
+                                      .replaceAll(',', ', '),
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     wordSpacing: 1,
                                   ),
@@ -159,7 +163,7 @@ class _ManageItemState extends State<ManageItem> {
                                 Text(
                                   "${homeController.isSearch.value ? homeController.searchitems[i].price : homeController.items[i].price}Ks",
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     letterSpacing: 1,
                                   ),

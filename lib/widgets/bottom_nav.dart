@@ -29,7 +29,7 @@ class BottomNav extends StatelessWidget {
         ],
       ),
       child: Obx(
-        () => Row(
+            () => Row(
           children: [
             Expanded(
               child: IconButton(
@@ -49,11 +49,10 @@ class BottomNav extends StatelessWidget {
                 onPressed: () {
                   controller.changeNav(1);
                 },
-                icon: FaIcon(
-                  FontAwesomeIcons.fire,
+                icon: Image.asset("assets/hotsale.png",
                   color: controller.navIndex.value == 1
-                      ? homeIndicatorColor
-                      : null,
+                      ? null
+                      : Colors.black,
                 ),
               ),
             ),
@@ -62,11 +61,20 @@ class BottomNav extends StatelessWidget {
                 onPressed: () {
                   controller.changeNav(2);
                 },
-                icon: FaIcon(
-                  FontAwesomeIcons.shoppingBag,
-                  color: controller.navIndex.value == 2
-                      ? homeIndicatorColor
-                      : null,
+                icon: Stack(
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.shoppingBag,
+                      color: controller.navIndex.value == 2
+                          ? homeIndicatorColor
+                          : null,
+                    ),
+                    CircleAvatar(
+                        backgroundColor: Colors.orange,
+                        minRadius: 30,
+                        maxRadius: 30,
+                        child: Text(controller.myCart.length.toString(),style: TextStyle(color: Colors.black,fontSize: 14),)),
+                  ],
                 ),
               ),
             ),

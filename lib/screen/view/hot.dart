@@ -12,7 +12,7 @@ class HotView extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeController controller = Get.find();
     return Obx(
-      () => ListView.builder(
+          () => ListView.builder(
         padding: EdgeInsets.only(top: 10, bottom: 20),
         itemCount: controller.hot().length,
         itemBuilder: (_, i) => GestureDetector(
@@ -20,11 +20,13 @@ class HotView extends StatelessWidget {
             controller.setSelectedItem(controller.hot()[i]);
             Get.toNamed(detailScreen);
           },
+
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
             margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -36,18 +38,35 @@ class HotView extends StatelessWidget {
                       Text(
                         controller.hot()[i].name,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Text(
-                        "${controller.hot()[i].price}Ks",
+                        "${controller.hot()[i].price}  Ks",
                         style: TextStyle(
+                          color: homeIndicatorColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+
+                      Row(
+                        children: List.generate(
+                          5,
+                              (index) => Icon(
+                            Icons.star,
+                            size: 16,
+                            color: index <= controller.getItems()[i].star
+                                ? homeIndicatorColor
+                                : Colors.grey,
+                          ),
                         ),
                       ),
                     ],

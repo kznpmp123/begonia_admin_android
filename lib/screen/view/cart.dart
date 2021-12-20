@@ -13,25 +13,25 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeController controller = Get.find();
+
     return Column(
       children: [
         Expanded(
           child: Obx(
-            () => ListView.builder(
-              padding: EdgeInsets.only(top: 10, bottom: 20),
+                () => ListView.builder(
               itemCount: controller.myCart.length,
               itemBuilder: (_, i) => Card(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+                margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                 child: Row(
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(6),
-                        bottomLeft: Radius.circular(6),
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
                       ),
                       child: CachedNetworkImage(
                         imageUrl:
-                            controller.getItem(controller.myCart[i].id).photo,
+                        controller.getItem(controller.myCart[i].id).photo,
                         // "$baseUrl$itemUrl${controller.getItem(controller.myCart[i].id).photo}/get",
                         width: 100,
                         height: 100,
@@ -47,16 +47,18 @@ class CartView extends StatelessWidget {
                         children: [
                           Text(controller.getItem(controller.myCart[i].id).name,
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                               )),
                           SizedBox(height: 5),
-                          Text("color: ${controller.myCart[i].color}"),
+                          Text("${controller.myCart[i].color}",
+                            style: TextStyle(fontSize: 12),),
                           SizedBox(height: 5),
-                          Text("size: ${controller.myCart[i].size}"),
+                          Text("${controller.myCart[i].size}",
+                            style: TextStyle(fontSize: 12),),
                           SizedBox(height: 5),
                           Text(
-                            "price: ${controller.getItem(controller.myCart[i].id).price}",
-                          ),
+                            "${controller.getItem(controller.myCart[i].id).price} ကျပ်",
+                            style: TextStyle(fontSize: 12),),
                         ],
                       ),
                     ),
@@ -88,34 +90,19 @@ class CartView extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          margin: EdgeInsets.only(top: 20),
-          height: 200,
+          height: 150,
           child: Card(
             margin: EdgeInsets.only(
               left: 20,
               right: 20,
             ),
             child: Obx(
-              () => Column(
+                  () => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 20,
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Text(
-                      'Cart Total',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 20,
+                      top: 10,
                       left: 20,
                       right: 20,
                     ),
@@ -123,16 +110,16 @@ class CartView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Sub Toal:",
+                          "ကုန်ပစ္စည်းအတွက် ကျသင့်ငွေ",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         Text(
-                          "${controller.subTotal}Ks",
+                          "${controller.subTotal} ကျပ်",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -149,16 +136,16 @@ class CartView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Shipping",
+                          "အိမ်အရောက် ပို့ဆောင်စရိတ်",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         Text(
-                          " ${controller.shipping()}Ks",
+                          " ${controller.shipping()} ကျပ်",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -167,13 +154,13 @@ class CartView extends StatelessWidget {
                   ),
                   Container(
                     width: double.infinity,
-                    height: 50,
+                    height: 40,
                     margin: EdgeInsets.only(
-                      left: 20,
-                      top: 20,
-                      right: 20,
+                      left: 10,
+                      top: 10,
+                      right: 10,
                     ),
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                    padding: EdgeInsets.only(left: 10, right: 10),
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(25, 25, 25, 1),
                       borderRadius: BorderRadius.circular(5),
@@ -182,17 +169,17 @@ class CartView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Payable Toal:",
+                          "စုစုပေါင်း ကျသင့်ငွေ   =  ",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
                         Text(
-                          "${controller.subTotal + controller.shipping()}Ks",
+                          "${controller.subTotal + controller.shipping()} ကျပ်",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -208,7 +195,7 @@ class CartView extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 45,
-          margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+          margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
           child: ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(homeIndicatorColor),
@@ -221,7 +208,7 @@ class CartView extends StatelessWidget {
                 Get.snackbar('Error', "Cart is empty");
               }
             },
-            child: Text("Proceed To Checkout"),
+            child: Text("Order တင်ရန် နှိပ်ပါ"),
           ),
         )
       ],

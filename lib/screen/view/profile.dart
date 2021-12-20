@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kozarni_ecome/controller/home_controller.dart';
@@ -17,16 +15,9 @@ class ProfileView extends StatelessWidget {
           ? _LoginUser()
           : ListView(
               children: [
-                SizedBox(
-                  height: 50,
-                ),
-                FlutterLogo(
-                  size: 100,
-                  // style: FlutterLogoStyle.stacked,
-                ),
-                SizedBox(
-                  height: 50,
-                ),
+      Image.asset(
+        "assets/logo.png", height:200,),
+
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                   child: TextFormField(
@@ -38,7 +29,7 @@ class ProfileView extends StatelessWidget {
                       border: OutlineInputBorder(),
                       hintText: controller.phoneState.value
                           ? 'Enter your code'
-                          : 'Phone Number(+9599***)',
+                          : 'Phone Number(+959***)',
                     ),
                   ),
                 ),
@@ -81,48 +72,19 @@ class _LoginUser extends StatelessWidget {
           child: Card(
             child: Column(
               children: [
-                GestureDetector(
-                  onTap: _controller.uploadProfile,
-                  child: Obx(
-                    () => _controller.user.value.profileImage == null
-                        ? Container(
-                            width: 100,
-                            height: 100,
-                            margin: EdgeInsets.only(
-                              top: 20,
-                              bottom: 20,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                          )
-                        : Padding(
+                         Padding(
                             padding: const EdgeInsets.only(
                               top: 20,
                               bottom: 20,
                             ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                              child: Image.asset(
-                                "assets/profile.JPG",
+                            child: Image.asset(
+                                "assets/logo.png",
                                 width: 100,
                                 height: 100,
-                                fit: BoxFit.cover,
                               ),
-                              // CachedNetworkImage(
-                              //   imageUrl:
-                              //       "$baseUrl$profileUrl${_controller.user.value.profileImage!}/get",
-                              //   width: 100,
-                              //   height: 100,
-                              //   fit: BoxFit.cover,
-                              // ),
                             ),
-                          ),
-                  ),
-                ),
+                //   ),
+                // ),
                 Obx(
                   () => Text(
                     _controller.user.value.user?.phoneNumber ?? '',
@@ -169,6 +131,7 @@ class _AdminPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = Get.find();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -242,12 +205,17 @@ class _AdminPanel extends StatelessWidget {
             ),
             child: Card(
               child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.only(left: 20, right: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Purchase"),
-                    Icon(Icons.shop),
+                    Text("My Orders  🎁"),
+                    CircleAvatar(
+                        backgroundColor: Colors.orange,
+                        minRadius: 20,
+                        maxRadius: 20,
+                        child: Text(controller.purhcases().length.toString(),
+                          style: TextStyle(color: Colors.black,fontSize: 14),)),
                   ],
                 ),
               ),

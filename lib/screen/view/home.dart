@@ -55,7 +55,7 @@ class HomeView extends StatelessWidget {
                             padding: EdgeInsets.only(
                               left: 20,
                               right: 20,
-                              top: 20,
+                              top: 10,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +132,7 @@ class HomeView extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: Text('Add'),
+                            child: Text('Add to Cart'),
                           ),
                         )
                       ],

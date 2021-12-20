@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.starlight.shopping">
+    package="com.kzn.begonia">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="kozarni_ecome"
+        android:label="Begonia"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

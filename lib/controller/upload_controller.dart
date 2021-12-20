@@ -112,6 +112,7 @@ class UploadController extends GetxController {
         filePath.value = '';
         photoController.clear();
         nameController.clear();
+        desc.clear();
         priceController.clear();
         colorController.clear();
         sizeController.clear();

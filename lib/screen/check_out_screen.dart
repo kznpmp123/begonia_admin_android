@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:kozarni_ecome/controller/home_controller.dart';
 import 'package:kozarni_ecome/data/constant.dart';
@@ -70,10 +69,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               child: TextFormField(
                 controller: nameController,
                 validator: (e) =>
-                    e?.isEmpty == true ? "Name is required" : null,
+                e?.isEmpty == true ? "Name is required" : null,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Name',
+                  hintText: 'အမည်',
                 ),
               ),
             ),
@@ -84,8 +83,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 validator: (e) => e?.isEmpty == true
                     ? "Email is required"
                     : e?.isEmail == true
-                        ? null
-                        : "Invalid email",
+                    ? null
+                    : "Invalid email",
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Email',
@@ -97,11 +96,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               child: TextFormField(
                 controller: phoneController,
                 validator: (e) =>
-                    e?.isEmpty == true ? "Phone is required" : null,
+                e?.isEmpty == true ? "Phone is required" : null,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Phone',
+                  hintText: 'ဆက်သွယ်ရန် ဖုန်းနံပါတ်',
                 ),
               ),
             ),
@@ -110,10 +109,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               child: TextFormField(
                 controller: addressController,
                 validator: (e) =>
-                    e?.isEmpty == true ? "Address is required" : null,
+                e?.isEmpty == true ? "Address is required" : null,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Address',
+                  hintText: 'ပို့ဆောင်ပေးရမည့် လိပ်စာ',
                 ),
               ),
             ),
@@ -134,16 +133,16 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     _form.currentState?.reset();
                     Get.back();
 
-                    Get.snackbar("Success", 'ready to rock');
+                    Get.snackbar("လူကြီးမင်း Order တင်ခြင်း", 'အောင်မြင်ပါသည်');
                   }
                 },
                 child: Obx(
-                  () => controller.isLoading.value
+                      () => controller.isLoading.value
                       ? CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 0.5,
-                        )
-                      : Text('Proceed To Pay'),
+                    color: Colors.white,
+                    strokeWidth: 0.5,
+                  )
+                      : Text('Order တင်ရန် နှိပ်ပါ'),
                 ),
               ),
             )
